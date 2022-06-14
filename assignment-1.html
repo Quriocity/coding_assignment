@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table assignment</title>
+</head>
+<body>
+    <!-- Table Area -->
+    <center>
+        <h2>Assignment 1</h2>
+        <br><br>
+        <table id="main_table" border="2px">
+            <thead>
+                <th>SL.No</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </thead>
+            <tbody >
+                <tr >
+                    <td >1</td>
+                    <td>Varun </td>
+                    <td>Madhav</td>
+                    <td>Banglore</td>
+                    <td>India</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Arun </td>
+                    <td>Mathew</td>
+                    <td>Chennai</td>
+                    <td>India</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Mike</td>
+                    <td>George</td>
+                    <td>Toronto</td>
+                    <td>Canada</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Amal </td>
+                    <td>Neeraj</td>
+                    <td>kochi</td>
+                    <td>India</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Asif</td>
+                    <td>Ali</td>
+                    <td>Ernakulam</td>
+                    <td>India</td>
+                </tr>
+            </tbody>
+        </table> <br><br>
+        <!-- Table Area End -->
+        <div>
+            <!-- Input Area -->
+            <form id="row_data" >
+                <input type="text" id="fname" placeholder="First Name" required>
+                <input type="text" id="lname" placeholder="Last Name" required>
+                <input type="text" id="city" placeholder="City" required>
+                <input type="text" id="country" placeholder="Country" required>
+            </form> <br><br>
+            <!-- Input Area End -->
+            <center>
+                <button onclick="add_to_bottom()" type="submit">Add row to bottom</button>
+                <button onclick="add_to_top()">Add row to top</button> <br><br>
+            </center>
+        </div>
+    </center>
+    <script language="javascript" type="text/javascript" >
+        let table = document.getElementById('main_table');
+        let form = document.getElementById('row_data');
+        
+        // retrive the data from the form and return it as array
+        function get_data() {
+            data = [];
+            data.push(document.getElementById('fname').value);
+            data.push(document.getElementById('lname').value);
+            data.push(document.getElementById('city').value);
+            data.push(document.getElementById('country').value);
+            return data
+        }
+
+        // Create a new row and insert the given data to the cells
+        function insert_row_and_data(Sl_no, last_row) {
+            var new_row = table.insertRow(last_row + 1);
+            // Inserting 5 new cells
+            for(let i=0;i<5;i++) {
+                new_row.insertCell(i);
+            }
+            // Setting the Sl.no column
+            new_row.cells[0].innerHTML = Sl_no + 1;
+            data = get_data();
+            // Inserting received data in to new cells
+            for (let i = 1; i<5; i++) {
+                new_row.cells[i].innerHTML = data[i - 1];
+            }
+            form.reset();
+        }
+
+        // Add a row to the bottom of the table
+        function add_to_bottom() {
+            let last_row = table.rows.length - 1;
+            let Sl_no = parseInt(table.rows[last_row].cells[0].innerHTML); 
+            insert_row_and_data( Sl_no, last_row);
+        }
+
+        // Add a row to the top of the table
+        function add_to_top() {
+            var new_row = table.insertRow(1);
+            for(let i=0;i<5;i++) {
+                new_row.insertCell(i);
+            }
+            new_row.cells[0].innerHTML = 1
+            data = get_data();
+            // Inserting received data in to new cells
+            for (let i = 1; i<5; i++) {
+                new_row.cells[i].innerHTML = data[i - 1];
+            }
+            form.reset();
+            new_Sl_no = 1
+            rows = table.rows;
+            for (i = 2,sl = 2;i < table.rows.length; i++,sl++) {
+                table.rows[i].cells[0].innerHTML = sl;
+            }
+        }
+
+
+</script>
+</body>
+</html>

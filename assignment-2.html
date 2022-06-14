@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Assignment</title>
+</head>
+<body>
+    <center>
+        <h2>Assignment 2</h2> <br><br>
+        <!-- Input Area -->
+        <form action="" id="sentence_form">
+            <label for="sen">Enter Sentence: </label>
+            <input type="text" name="sen" id="sentence" required="True"> <br><br>
+            <label for="letr">Enter a Letter:  </label>
+            <input type="text" name="letr" id="letter"required maxlength="1"> <br><br>
+            <button id="btn1" onclick="rest_of_sentence(event)">Submit</button>
+        </form>
+        <!-- Input Area End -->
+        <p id="remaining"></p>
+    </center>
+
+
+    <script language="javascript" type="text/javascript">
+        form = document.getElementById('sentence_form');
+
+        // Finds the remaining portion of the sentence
+        function rest_of_sentence(event) {
+            event.preventDefault();
+            let sentence = document.getElementById('sentence').value;
+            let letter = document.getElementById('letter').value;
+            if ((sentence == '') || letter == '') {
+                alert("Please Fill the inputs");
+                return;
+            }
+            letter_index = sentence.indexOf(letter);
+            if (letter_index == -1) {
+                document.getElementById('remaining').innerHTML = 'The letter does not exist in the sentence'
+            }
+            else {
+                str_length = sentence.length;
+                remaining = sentence.slice(-((str_length - 1) - letter_index ));
+                console.log(((str_length - 1) - letter_index ))
+                if (remaining == sentence) {
+                    document.getElementById('remaining').innerHTML = "No letters after the specified letter";
+                    return;
+                }
+                document.getElementById('remaining').innerHTML = remaining;
+            }
+        }
+    </script>
+</body>
+</html>
